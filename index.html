@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الثقافة السودانية | تراث السودان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --dark-moss-green: #606c38;
+            --pakistan-green: #283618;
+            --cornsilk: #fefae0;
+            --earth-yellow: #dda15e;
+            --tigers-eye: #bc6c25;
+            --arabic-font: 'Noto Naskh Arabic', serif;
+            --english-font: 'Open Sans', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--arabic-font);
+            background-color: var(--cornsilk);
+            color: var(--pakistan-green);
+            line-height: 1.8;
+            overflow-x: hidden;
+            transition: var(--transition);
+            background-image: url('https://www.transparenttextures.com/patterns/concrete-wall-2.png');
+        }
+        
+        body[dir="ltr"] {
+            font-family: var(--english-font);
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            color: var(--pakistan-green);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--pakistan-green);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .preloader-logo {
+            font-size: 3rem;
+            color: var(--earth-yellow);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .preloader-logo i {
+            margin-left: 15px;
+            color: var(--cornsilk);
+        }
+        
+        .preloader-progress {
+            width: 300px;
+            height: 5px;
+            background: rgba(254, 250, 224, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .preloader-progress-bar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--earth-yellow);
+            transition: width 0.3s ease;
+        }
+        
+        /* Particles background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.97);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--earth-yellow);
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--tigers-eye);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+            color: var(--dark-moss-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--pakistan-green);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+            font-size: 1.05rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--earth-yellow);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--earth-yellow);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Language Toggle */
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(221, 161, 94, 0.15);
+            border-radius: 30px;
+            padding: 5px;
+            margin-right: 20px;
+        }
+        
+        .lang-btn {
+            padding: 8px 15px;
+            border-radius: 30px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn.active {
+            background: var(--earth-yellow);
+            color: var(--pakistan-green);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            color: var(--dark-moss-green);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--earth-yellow);
+            border-radius: 3px;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.3rem;
+            color: var(--pakistan-green);
+        }
+        
+        /* Culture Cards Section */
+        .culture-mosaic {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .culture-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            transform: translateY(50px);
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .culture-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .culture-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s ease;
+        }
+        
+        .culture-card:hover .culture-img {
+            transform: scale(1.05);
+        }
+        
+        .culture-content {
+            padding: 30px;
+        }
+        
+        .culture-content h3 {
+            color: var(--dark-moss-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+        
+        .culture-content h3 i {
+            margin-left: 10px;
+            color: var(--tigers-eye);
+            font-size: 1.6rem;
+        }
+        
+        /* Info Container */
+        .info-container {
+            background-color: rgba(96, 108, 56, 0.08);
+            position: relative;
+            margin-top: 80px;
+            border-radius: 15px;
+            padding: 60px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/45-degree-fabric-light.png');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .default-info {
+            text-align: center;
+            padding: 40px;
+            transition: var(--transition);
+        }
+        
+        .default-info i {
+            font-size: 3rem;
+            color: var(--earth-yellow);
+            margin-bottom: 20px;
+        }
+        
+        .default-info h3 {
+            color: var(--tigers-eye);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .default-info p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .culture-info {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .culture-name {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--tigers-eye);
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .culture-name::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--earth-yellow);
+            border-radius: 3px;
+        }
+        
+        .culture-details {
+            margin-top: 30px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-left: 10px;
+        }
+        
+        .culture-details::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .culture-details::-webkit-scrollbar-track {
+            background: rgba(221, 161, 94, 0.1);
+            border-radius: 4px;
+        }
+        
+        .culture-details::-webkit-scrollbar-thumb {
+            background: var(--earth-yellow);
+            border-radius: 4px;
+        }
+        
+        .detail-item {
+            display: flex;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(96, 108, 56, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        [dir="ltr"] .detail-item {
+            flex-direction: row;
+        }
+        
+        .detail-item:hover {
+            background: rgba(221, 161, 94, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            min-width: 120px;
+            color: var(--dark-moss-green);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        [dir="ltr"] .detail-label {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+        
+        .detail-label i {
+            margin-left: 10px;
+            font-size: 1.3rem;
+            color: var(--tigers-eye);
+        }
+        
+        [dir="ltr"] .detail-label i {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+        
+        .detail-value {
+            flex-grow: 1;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--earth-yellow);
+            color: var(--pakistan-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            background: var(--tigers-eye);
+            color: var(--cornsilk);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .info-container {
+                padding: 40px;
+            }
+            
+            .culture-name {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .info-container {
+                padding: 30px;
+            }
+            
+            .detail-item {
+                flex-direction: column;
+            }
+            
+            .detail-label {
+                margin-bottom: 10px;
+            }
+            
+            [dir="ltr"] .detail-item {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .section-header p {
+                font-size: 1.1rem;
+            }
+            
+            .info-container {
+                padding: 20px;
+            }
+            
+            .culture-name {
+                font-size: 1.8rem;
+            }
+            
+            .detail-label, .detail-value {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-logo">
+            <i class="fas fa-monument"></i>
+            <span id="preloader-text">تراث السودان</span>
+        </div>
+        <div class="preloader-progress">
+            <div class="preloader-progress-bar"></div>
+        </div>
+    </div>
+    
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Scroll to top button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-monument"></i>
+                    <span id="logo-text">تراث السودان</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#mosaic" id="nav-mosaic">العناصر الثقافية</a></li>
+                    <li><a href="#info" id="nav-info">المعلومات الثقافية</a></li>
+                </ul>
+                <div class="language-toggle">
+                    <button class="lang-btn" id="en-btn">English</button>
+                    <button class="lang-btn active" id="ar-btn">العربية</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="hero-title">العناصر الثقافة السودانية</h1>
+                <p id="hero-subtitle">اكتشف التنوع الثقافي الغني للسودان من خلال تقاليده وموسيقاه وفنونه</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Mosaic Section -->
+    <section id="mosaic">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="mosaic-title">العناصر الثقافية</h2>
+                <p id="mosaic-subtitle">انقر على أي عنصر ثقافي لمعرفة المزيد عن أهميته وتقاليده</p>
+            </div>
+            <div class="culture-mosaic">
+                <div class="culture-card" data-culture="tambour">
+                    <div class="culture-img" style="background-image: url('https://mimg6cdn.haraj.com.sa/userfiles30/2024-08-09/1012x1800_AAD97A5A-74C3-423F-906B-CEC7C279FCA1.jpg');"></div>
+                    <div class="culture-content">
+                        <h3><i class="fas fa-music"></i> <span id="tambour-name">رقصة الطمبور</span></h3>
+                        <p id="tambour-desc">أداء سوداني تقليدي يشتمل على قرع الطبول الإيقاعي وحركات رشيقة.</p>
+                    </div>
+                </div>
+                <div class="culture-card" data-culture="coffee">
+                    <div class="culture-img" style="background-image: url('https://www.horizonsudan.com/wp-content/uploads/2025/04/%D8%A7%D9%84%D9%82%D9%87%D9%88%D8%A9-%D8%A7%D9%84%D8%B3%D9%88%D8%AF%D8%A7%D9%86%D9%8A%D8%A9.jpg');"></div>
+                    <div class="culture-content">
+                        <h3><i class="fas fa-coffee"></i> <span id="coffee-name">طقوس القهوة</span></h3>
+                        <p id="coffee-desc">مراسم متقنة لإعداد وتقديم القهوة للضيوف.</p>
+                    </div>
+                </div>
+                <div class="culture-card" data-culture="henna">
+                    <div class="culture-img" style="background-image: url('https://pbs.twimg.com/media/CVD1M0tVAAE0BXH.jpg:large');"></div>
+                    <div class="culture-content">
+                        <h3><i class="fas fa-paint-brush"></i> <span id="henna-name">فن الحناء</span></h3>
+                        <p id="henna-desc">تصاميم معقدة تطبق على اليدين والقدمين لأغراض زخرفية.</p>
+                    </div>
+                </div>
+                <div class="culture-card" data-culture="thobe">
+                    <div class="culture-img" style="background-image: url('https://pbs.twimg.com/media/DbJHEkOW0AAamDp.jpg');"></div>
+                    <div class="culture-content">
+                        <h3><i class="fas fa-tshirt"></i> <span id="thobe-name">الجلابية التقليدية</span></h3>
+                        <p id="thobe-desc">رداء أبيض طويل يرتديه الرجال، غالبًا مع تطريز متقن.</p>
+                    </div>
+                </div>
+                <div class="culture-card" data-culture="music">
+                    <div class="culture-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpf26Auvz_aCsVzrRaHQuJ6XOdjmOLqRUm9w&s');"></div>
+                    <div class="culture-content">
+                        <h3><i class="fas fa-headphones"></i> <span id="music-name">الموسيقى الشعبية</span></h3>
+                        <p id="music-desc">تقاليد موسيقية متنوعة تشمل الطبول وآلات الوتر.</p>
+                    </div>
+                </div>
+                <div class="culture-card" data-culture="food">
+                    <div class="culture-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR1L4P-7jL3iJH2qoNd-rOWSOqdFpdkWJFsw&s');"></div>
+                    <div class="culture-content">
+                        <h3><i class="fas fa-utensils"></i> <span id="food-name">المأكولات التقليدية</span></h3>
+                        <p id="food-desc">مجموعة غنية من الأطباق بنكهات فريدة وطرق تحضير مميزة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="info" class="resources">
+        <div class="container">
+            <div class="info-container">
+                <div class="default-info" id="defaultInfo">
+                    <i class="fas fa-hand-pointer"></i>
+                    <h3 id="default-title">استكشف الثقافة السودانية</h3>
+                    <p id="default-text1">انقر على أي عنصر ثقافي لعرض معلومات مفصلة عن تقاليده وأهميته في المجتمع السوداني.</p>
+                    <p id="default-text2">يتمتع السودان بتراث ثقافي غني مع تقاليد متنوعة عبر مناطقها.</p>
+                </div>
+                
+                <div class="culture-info" id="cultureInfo">
+                    <h2 class="culture-name" id="cultureName">اسم الثقافة</h2>
+                    
+                    <div class="culture-details">
+                        <div class="detail-item">
+                            <div class="detail-label"><i class="fas fa-info-circle"></i> <span id="detail-about-label">حول:</span></div>
+                            <div class="detail-value" id="detailAbout">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label"><i class="fas fa-map-marker-alt"></i> <span id="detail-region-label">المنطقة:</span></div>
+                            <div class="detail-value" id="detailRegion">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label"><i class="fas fa-calendar-alt"></i> <span id="detail-occasion-label">المناسبة:</span></div>
+                            <div class="detail-value" id="detailOccasion">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label"><i class="fas fa-history"></i> <span id="detail-history-label">التاريخ:</span></div>
+                            <div class="detail-value" id="detailHistory">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label"><i class="fas fa-star"></i> <span id="detail-significance-label">الأهمية:</span></div>
+                            <div class="detail-value" id="detailSignificance">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p id="footer-copyright">© 2023 تراث السودان. جميع الحقوق محفوظة. | الاحتفال بالتراث الغني للسودان</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Cultural data in both languages
+        const cultureData = {
+            "ar": {
+                "tambour": {
+                    name: "رقصة الطمبور",
+                    about: "رقصة الطمبور هي أداء سوداني تقليدي يشتمل على قرع الطبول الإيقاعي وحركات رشيقة.",
+                    region: "تمارس في جميع أنحاء السودان، خاصة في المناطق الوسطى والشمالية",
+                    occasion: "الأعراس والاحتفالات والمهرجانات الثقافية",
+                    history: "يعود تاريخها إلى قرون، ولها جذور في تقاليد النوبة القديمة",
+                    significance: "تمثل الفرح والترابط المجتمعي والهوية الثقافية"
+                },
+                "coffee": {
+                    name: "طقوس القهوة",
+                    about: "طقوس القهوة السودانية هي مراسم متقنة لإعداد وتقديم القهوة للضيوف.",
+                    region: "تمارس في جميع أنحاء البلاد مع اختلافات إقليمية",
+                    occasion: "التجمعات الاجتماعية وزيارات العائلة والمناسبات الخاصة",
+                    history: "تم تقديمها من خلال التجارة مع إثيوبيا وشبه الجزيرة العربية",
+                    significance: "ترمز إلى الكرم والصداقة والترابط الاجتماعي"
+                },
+                "henna": {
+                    name: "فن الحناء",
+                    about: "تصاميم معقدة تطبق على اليدين والقدمين باستخدام عجينة الحناء الطبيعية لأغراض زخرفية.",
+                    region: "شعبية في جميع أنحاء السودان مع اختلافات في الأنماط الإقليمية",
+                    occasion: "الأعراس واحتفالات العيد والمناسبات الخاصة",
+                    history: "تقليد قديم له جذور في كل من الثقافات الأفريقية والعربية",
+                    significance: "تمثل الجمال والاحتفال والتراث الثقافي"
+                },
+                "thobe": {
+                    name: "الجلابية التقليدية",
+                    about: "الجلابية السودانية هي رداء أبيض طويل يرتديه الرجال، غالبًا مع تطريز متقن.",
+                    region: "تلبس في جميع أنحاء السودان مع اختلافات في الأنماط الإقليمية",
+                    occasion: "الملابس اليومية والمناسبات الدينية والرسمية",
+                    history: "تطورت من تقاليد الملابس القديمة التي تكيفت مع مناخ السودان",
+                    significance: "ترمز إلى الهوية السودانية والتواضع والفخر الثقافي"
+                },
+                "music": {
+                    name: "الموسيقى الشعبية",
+                    about: "تقاليد موسيقية متنوعة تشمل الطبول وآلات الوتر والتوافق الصوتي.",
+                    region: "توجد اختلافات في جميع مناطق السودان",
+                    occasion: "الاحتفالات والتجمعات الاجتماعية والفعاليات الثقافية",
+                    history: "مزيج من التقاليد الموسيقية الأفريقية والعربية والأصلية",
+                    significance: "تحافظ على القصص الثقافية والتقاليد وقيم المجتمع"
+                },
+                "food": {
+                    name: "المأكولات التقليدية",
+                    about: "تتميز المأكولات السودانية بمجموعة غنية من الأطباق بنكهات فريدة وطرق تحضير مميزة.",
+                    region: "أطباق وطنية مع أكلات إقليمية خاصة",
+                    occasion: "الوجبات اليومية والأعياد والاحتفالات الخاصة",
+                    history: "تأثرت بالتقاليد الغذائية الأصلية والعربية والأفريقية",
+                    significance: "تمثل الكرم والتنوع الثقافي وتقاليد العائلة"
+                }
+            },
+            "en": {
+                "tambour": {
+                    name: "Tambour Dance",
+                    about: "The Tambour dance is a traditional Sudanese performance involving rhythmic drumming and graceful movements.",
+                    region: "Practiced throughout Sudan, especially in central and northern regions",
+                    occasion: "Weddings, celebrations, and cultural festivals",
+                    history: "Dating back centuries, this dance form has roots in ancient Nubian traditions",
+                    significance: "Represents joy, community bonding, and cultural identity"
+                },
+                "coffee": {
+                    name: "Coffee Ceremony",
+                    about: "The Sudanese coffee ceremony is a elaborate ritual of preparing and serving coffee to guests.",
+                    region: "Practiced nationwide with regional variations",
+                    occasion: "Social gatherings, family visits, and special occasions",
+                    history: "Introduced through trade with Ethiopia and the Arabian peninsula",
+                    significance: "Symbolizes hospitality, friendship, and social connection"
+                },
+                "henna": {
+                    name: "Henna Art",
+                    about: "Intricate designs applied to hands and feet using natural henna paste for decorative purposes.",
+                    region: "Popular across Sudan with regional style variations",
+                    occasion: "Weddings, Eid celebrations, and special events",
+                    history: "Ancient tradition with roots in both African and Arab cultures",
+                    significance: "Represents beauty, celebration, and cultural heritage"
+                },
+                "thobe": {
+                    name: "Traditional Thobe",
+                    about: "The Sudanese thobe is a long white robe worn by men, often with elaborate embroidery.",
+                    region: "Worn throughout Sudan with regional style differences",
+                    occasion: "Daily wear, religious events, and formal occasions",
+                    history: "Evolved from ancient clothing traditions adapted to Sudan's climate",
+                    significance: "Symbolizes Sudanese identity, modesty, and cultural pride"
+                },
+                "music": {
+                    name: "Folk Music",
+                    about: "Diverse musical traditions incorporating drums, string instruments, and vocal harmonies.",
+                    region: "Variations exist across all Sudanese regions",
+                    occasion: "Celebrations, social gatherings, and cultural events",
+                    history: "Blend of African, Arab, and indigenous musical traditions",
+                    significance: "Preserves cultural stories, traditions, and community values"
+                },
+                "food": {
+                    name: "Traditional Cuisine",
+                    about: "Sudanese cuisine features a rich variety of dishes with unique flavors and preparation methods.",
+                    region: "National dishes with regional specialties",
+                    occasion: "Daily meals, holidays, and special celebrations",
+                    history: "Influenced by indigenous, Arab, and African culinary traditions",
+                    significance: "Represents hospitality, cultural diversity, and family traditions"
+                }
+            }
+        };
+
+        // Translation dictionary
+        const translations = {
+            "ar": {
+                "title": "العناصر الثقافة السودانية",
+                "subtitle": "اكتشف التنوع الثقافي الغني للسودان من خلال تقاليده وموسيقاه وفنونه",
+                "instruction": "انقر على أي عنصر ثقافي لمعرفة المزيد عن أهميته وتقاليده",
+                "mosaic-title": "العناصر الثقافية",
+                "tambour-name": "رقصة الطمبور",
+                "tambour-desc": "أداء سوداني تقليدي يشتمل على قرع الطبول الإيقاعي وحركات رشيقة.",
+                "coffee-name": "طقوس القهوة",
+                "coffee-desc": "مراسم متقنة لإعداد وتقديم القهوة للضيوف.",
+                "henna-name": "فن الحناء",
+                "henna-desc": "تصاميم معقدة تطبق على اليدين والقدمين لأغراض زخرفية.",
+                "thobe-name": "الجلابية التقليدية",
+                "thobe-desc": "رداء أبيض طويل يرتديه الرجال، غالبًا مع تطريز متقن.",
+                "music-name": "الموسيقى الشعبية",
+                "music-desc": "تقاليد موسيقية متنوعة تشمل الطبول وآلات الوتر.",
+                "food-name": "المأكولات التقليدية",
+                "food-desc": "مجموعة غنية من الأطباق بنكهات فريدة وطرق تحضير مميزة.",
+                "info-title": "معلومات ثقافية",
+                "default-title": "استكشف الثقافة السودانية",
+                "default-text1": "انقر على أي عنصر ثقافي لعرض معلومات مفصلة عن تقاليده وأهميته في المجتمع السوداني.",
+                "default-text2": "يتمتع السودان بتراث ثقافي غني مع تقاليد متنوعة عبر مناطقها.",
+                "detail-about-label": "حول:",
+                "detail-region-label": "المنطقة:",
+                "detail-occasion-label": "المناسبة:",
+                "detail-history-label": "التاريخ:",
+                "detail-significance-label": "الأهمية:",
+                "footer": "© 2023 تراث السودان. جميع الحقوق محفوظة. | الاحتفال بالتراث الغني للسودان",
+                "nav-mosaic": "العناصر الثقافية",
+                "nav-info": "المعلومات الثقافية",
+                "preloader-text": "تراث السودان",
+                "logo-text": "تراث السودان"
+            },
+            "en": {
+                "title": "Sudanese Cultural Mosaic",
+                "subtitle": "Discover the rich cultural diversity of Sudan through its traditions, music, and arts",
+                "instruction": "Click on any cultural element to learn more about its significance and traditions",
+                "mosaic-title": "Cultural Elements",
+                "tambour-name": "Tambour Dance",
+                "tambour-desc": "Traditional Sudanese performance involving rhythmic drumming and graceful movements.",
+                "coffee-name": "Coffee Ceremony",
+                "coffee-desc": "Elaborate ritual of preparing and serving coffee to guests.",
+                "henna-name": "Henna Art",
+                "henna-desc": "Intricate designs applied to hands and feet for decorative purposes.",
+                "thobe-name": "Traditional Thobe",
+                "thobe-desc": "Long white robe worn by men, often with elaborate embroidery.",
+                "music-name": "Folk Music",
+                "music-desc": "Diverse musical traditions incorporating drums and string instruments.",
+                "food-name": "Traditional Cuisine",
+                "food-desc": "Rich variety of dishes with unique flavors and preparation methods.",
+                "info-title": "Cultural Information",
+                "default-title": "Explore Sudanese Culture",
+                "default-text1": "Click on any cultural element to view detailed information about its traditions and significance in Sudanese society.",
+                "default-text2": "Sudan boasts a rich cultural heritage with diverse traditions across its regions.",
+                "detail-about-label": "About:",
+                "detail-region-label": "Region:",
+                "detail-occasion-label": "Occasion:",
+                "detail-history-label": "History:",
+                "detail-significance-label": "Significance:",
+                "footer": "© 2023 Sudan Heritage. All rights reserved. | Celebrating Sudan's rich cultural legacy",
+                "nav-mosaic": "Cultural Mosaic",
+                "nav-info": "Cultural Info",
+                "preloader-text": "Sudan Heritage",
+                "logo-text": "Sudan Heritage"
+            }
+        };
+
+        // Preloader simulation
+        const preloader = document.getElementById('preloader');
+        const progressBar = document.querySelector('.preloader-progress-bar');
+        const preloaderLogo = document.querySelector('.preloader-logo');
+        
+        // Simulate progress
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 10);
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                
+                // Animate preloader out
+                gsap.to(preloaderLogo, {
+                    opacity: 0,
+                    y: -20,
+                    duration: 0.5,
+                    delay: 0.5
+                });
+                
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 1,
+                    delay: 1,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                    }
+                });
+            }
+            progressBar.style.width = progress + '%';
+        }, 200);
+        
+        // Animate preloader logo in
+        gsap.to(preloaderLogo, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.5
+        });
+        
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#dda15e"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.3,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#bc6c25",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+        
+        // Language toggle functionality
+        const enBtn = document.getElementById('en-btn');
+        const arBtn = document.getElementById('ar-btn');
+        const htmlElement = document.documentElement;
+        
+        // Set up language toggle
+        enBtn.addEventListener('click', () => {
+            translatePage('en');
+        });
+        
+        arBtn.addEventListener('click', () => {
+            translatePage('ar');
+        });
+        
+        // Function to translate the page
+        function translatePage(lang) {
+            // Update all translatable elements
+            for (const [key, value] of Object.entries(translations[lang])) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = value;
+                }
+            }
+
+            // Update page direction and language
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', 
+                    (lang === 'en' && btn.id === 'en-btn') || 
+                    (lang === 'ar' && btn.id === 'ar-btn')
+                );
+            });
+            
+            // Update culture info if one is active
+            const activeCard = document.querySelector('.culture-card.active');
+            if (activeCard) {
+                const cultureId = activeCard.getAttribute('data-culture');
+                showCultureInfo(cultureId, lang);
+            }
+        }
+        
+        // Set up culture card clicks
+        const cultureCards = document.querySelectorAll('.culture-card');
+        const defaultInfo = document.getElementById('defaultInfo');
+        const cultureInfo = document.getElementById('cultureInfo');
+        
+        cultureCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active class from all cards
+                cultureCards.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked card
+                this.classList.add('active');
+                
+                // Get culture ID
+                const cultureId = this.getAttribute('data-culture');
+                
+                // Show culture info
+                showCultureInfo(cultureId);
+                
+                // Scroll to the info section
+                const infoSection = document.getElementById('info');
+                if (infoSection) {
+                    window.scrollTo({
+                        top: infoSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Function to show culture information
+        function showCultureInfo(cultureId, lang = document.documentElement.lang) {
+            const data = cultureData[lang][cultureId];
+            
+            if (data) {
+                // Update culture information
+                document.getElementById('cultureName').textContent = data.name;
+                document.getElementById('detailAbout').textContent = data.about;
+                document.getElementById('detailRegion').textContent = data.region;
+                document.getElementById('detailOccasion').textContent = data.occasion;
+                document.getElementById('detailHistory').textContent = data.history;
+                document.getElementById('detailSignificance').textContent = data.significance;
+                
+                // Show culture info, hide default message
+                defaultInfo.style.display = 'none';
+                cultureInfo.style.display = 'block';
+                
+                // Animate the info in
+                gsap.from(cultureInfo, {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            }
+        }
+        
+        // Reset to default info when clicking outside cards
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.culture-card') && !e.target.closest('.culture-info')) {
+                cultureCards.forEach(c => c.classList.remove('active'));
+                defaultInfo.style.display = 'block';
+                cultureInfo.style.display = 'none';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect and animation
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+            
+            // Scroll to top button
+            const scrollTop = document.querySelector('.scroll-top');
+            if (window.scrollY > 500) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        // Scroll to top functionality
+        document.querySelector('.scroll-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Initialize GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate header in
+        gsap.to('header', {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            delay: 1.5,
+            ease: "power3.out"
+        });
+        
+        // Hero content animation
+        gsap.to('.hero-content', {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            delay: 1.8,
+            ease: "power3.out"
+        });
+        
+        // Section headers animation
+        gsap.utils.toArray('.section-header').forEach(header => {
+            gsap.from(header, {
+                scrollTrigger: {
+                    trigger: header,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+        
+        // Culture cards animation
+        gsap.utils.toArray('.culture-card').forEach((card, index) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: "power3.out"
+            });
+        });
+        
+        // Initialize page in Arabic
+        translatePage('ar');
+    </script>
+</body>
+</html>
